@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bangku Penonton Bioskop</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Kustomisasi CSS tambahan */
+    .seat {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      background-color: #87CEEB; /* Biru Muda */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .selected {
+      background-color: #ff0000 !important; /* Merah */
+      color: #fff;
+    }
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .jam {
+      margin-bottom: 20px;
+    }
+    .btn-jam {
+      margin: 5px;
+      background-color: #FFD700; /* Kuning Tua */
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .btn-jam:hover {
+      background-color: #FFA500; /* Oranye */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Judul Film: <span id="judulFilm">Judul Film Disini</span></h1>
+    <div class="jam">
+      <h2>Pilih Jam Tayang:</h2>
+      <button class="btn-jam" onclick="selectTime('10:00')">10:00</button>
+      <button class="btn-jam" onclick="selectTime('13:00')">13:00</button>
+      <button class="btn-jam" onclick="selectTime('16:00')">16:00</button>
+      <button class="btn-jam" onclick="selectTime('19:00')">19:00</button>
+    </div>
+    <div class="d-flex justify-content-center">
+      <!-- Bangku-bangku penonton -->
+      <!-- Jumlah bangku disesuaikan dengan kebutuhan, dalam kasus ini 140 bangku -->
+      <!-- Menggunakan JavaScript untuk menambahkan fungsi pemilihan bangku -->
+      <div class="row-divider">
+        <!-- Bangku-bangku di sini -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (diperlukan untuk fungsi collapse) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Fungsi untuk mengubah status seleksi bangku
+    function toggleSeat(seat) {
+      seat.classList.toggle('selected');
+    }
+
+    // Fungsi untuk memilih jam tayang
+    function selectTime(time) {
+      console.log('Jam tayang dipilih: ' + time);
+    }
+
+    // Membuat bangku-bangku penonton
+    var container = document.querySelector('.row-divider');
+    var letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    // Membuat 140 bangku penonton dengan huruf di setiap baris berganti setiap 20 bangku
+    for (var i = 1; i <= 140; i++) {
+      var seat = document.createElement('div');
+      seat.className = 'seat';
+      seat.textContent = letters[Math.floor((i - 1) / 20)];
+      seat.textContent += (i % 20 == 0) ? 20 : i % 20;
+      seat.onclick = function() {
+        toggleSeat(this);
+      };
+      container.appendChild(seat);
+    }
+  </script>
+</body>
+</html>
